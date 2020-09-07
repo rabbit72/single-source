@@ -85,7 +85,7 @@ except VersionNotFoundError:
 
 
 ### Not only pyproject.toml
-You can use `single-source` even you still store the version of your library
+You can use `single-source` even if you still store the version of your library
 in `setup.py` or in any other `utf-8` encoded text file.
 
 >First, try without custom `regex`, probably it can parse the version
