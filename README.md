@@ -2,7 +2,7 @@
 > `single-source` helps to reduce the entropy in your Python project by keeping
 > single source of truth.
 
-The targets of this library are modern Python projects which want to have 
+The targets of this library are modern Python projects which want to have
 one source of truth for version, name and etc.
 
 At the moment, the library provides the single point for a package version.
@@ -48,8 +48,8 @@ or via [poetry](https://python-poetry.org/docs/#installation)
 poetry add single-source
 ```
 
-The library also available as 
-[a conda package](https://docs.conda.io/projects/conda/en/latest/) in 
+The library also available as
+[a conda package](https://docs.conda.io/projects/conda/en/latest/) in
 [conda-forge](https://anaconda.org/conda-forge/repo) channel
 ```bash
 conda install single-source --channel conda-forge
@@ -57,7 +57,7 @@ conda install single-source --channel conda-forge
 
 ## Advanced usage
 ### Changing default value
-If it's not possible to get the version from package metadata or 
+If it's not possible to get the version from package metadata or
 there is no pyproject.toml `get_version` returns `""` - empty string by default.
 You can change this value by providing a value as a `default_return` keyword argument.
 
@@ -85,7 +85,7 @@ except VersionNotFoundError:
 
 
 ### Not only pyproject.toml
-You can use `single-source` even you still store the version of your library
+You can use `single-source` even if you still store the version of your library
 in `setup.py` or in any other `utf-8` encoded text file.
 
 >First, try without custom `regex`, probably it can parse the version
@@ -110,4 +110,3 @@ Please make sure to update tests as appropriate.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
-

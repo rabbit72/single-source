@@ -1,3 +1,5 @@
+import sys
+
 import pytest
 import toml
 
@@ -9,17 +11,20 @@ from single_source.version import (
     get_version,
 )
 
-try:
-    import importlib.metadata as importlib_metadata
-except ModuleNotFoundError:
-    # for Python <3.8 add 'importlib_metadata' as a dependency
-    import importlib_metadata
-
 
 def test_get_version_from_installed_package(mocker):
     expected_version = "2.0.1-alpha.0"
-    mocker.patch("importlib_metadata.version")
-    importlib_metadata.version.return_value = expected_version
+
+    if sys.version_info < (3, 8):
+        import importlib_metadata
+
+        mocker.patch("importlib_metadata.version")
+        importlib_metadata.version.return_value = expected_version
+    elif sys.version_info >= (3, 8):
+        import importlib.metadata
+
+        mocker.patch("importlib.metadata.version")
+        importlib.metadata.version.return_value = expected_version
 
     version_from_metadata = _get_version_from_metadata("does not matter")
     assert version_from_metadata == expected_version
