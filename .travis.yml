@@ -1,17 +1,9 @@
 language: python
-python:
-  - "3.6"
-  - "3.7"
-  - "3.8"
-  - "3.8"
-  - "3.9-dev"
-
+os: linux
+dist: xenial
 env:
   global:
     - POETRY_VIRTUALENVS_CREATE=false
-
-stages:
-  - quality_check
 
 before_install:
   - pip install poetry
@@ -24,13 +16,23 @@ script:
 
 jobs:
   include:
-    - stage: quality_check
-      script:
-        - pre-commit run --all-files
-
-deploy:
-  provider: script
-  script: poetry publish -u $PYPI_USERNAME -p $PYPI_PASSWORD
-  skip_cleanup: true
-  on:
-    tags: true
+    - stage: quality
+      name: black
+      script: black . --check
+    - name: isort
+      script: isort . --check
+    - name: flake8
+      script: flake8 .
+    - stage: test
+      python: 3.6
+    - python: 3.7
+    - python: 3.8
+    - python: 3.9-dev
+    - stage: publish
+      script: skip
+      deploy:
+        provider: script
+        script: poetry publish --build -u $PYPI_USERNAME -p $PYPI_PASSWORD
+        cleanup: false
+        on:
+          tags: true
