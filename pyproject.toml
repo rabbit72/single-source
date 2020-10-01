@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "single-source"
-version = "0.1.0"
+version = "0.1.1"
 description = "Access to the project version in Python code for PEP 621-style projects"
 authors = ["Daniil Shadrin <rabbit72rus@gmail.com>"]
 maintainers = ["Daniil Shadrin <rabbit72rus@gmail.com>"]
@@ -24,16 +24,19 @@ packages = [{include = "single_source"}]
 "Bug Tracker" = "https://github.com/rabbit72/single-source/issues"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.0"
-pytest-mock = "^3.3.1"
-black = "^20.8b1"
 toml = "^0.10.1"
+pytest = "*"
+pytest-mock = "*"
+black = "^20.8b1"
 isort = {version = "*", extras = ["pyproject"]}
+flake8 = "*"
+flake8-bugbear = "*"
+pre-commit = "*"
 
 
 [tool.poetry.dependencies]
 python = "^3.6"
-importlib_metadata = { version = "^1.6", python = "< 3.8" }
+importlib_metadata = { version = "^2.0", python = "< 3.8" }
 
 
 # backward compatibility with black
@@ -43,6 +46,7 @@ include_trailing_comma = true
 force_grid_wrap = 0
 use_parentheses = true
 line_length = 88
+known_third_party = ["pytest", "setuptools", "toml"]
 
 # backward compatibility with black
 [tool.pylint.messages_control]

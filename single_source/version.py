@@ -23,25 +23,26 @@ def get_version(
     version_regex: str = VERSION_REGEX,
 ) -> Optional[str]:
     """
-    Retrieve your project version from package metadata or file with regex
-    (by default from "pyproject.toml")
+        Retrieve your project version from package metadata or file with regex
+        (by default from "pyproject.toml")
 
-    :param package_name: The name of your package
-    :type package_name: str
-    :param target_dir_or_file: A path to a file or to a directory
-which contains pyproject.toml
-    :type target_dir_or_file: Union[Path, str]
-    :param fail: Raises VersionNotFoundError if True, by default False
-    :type fail: bool
-    :param default_return: Returns when the version hasn't been found,
-    empty string by default, ignored when fail is True
-    :type default_return: Optional[str]
-    :param version_regex: Regular expression for parsing version from a file
-    :type version_regex: str
+        :param package_name: The name of your package
+        :type package_name: str
+        :param target_dir_or_file: A path to a file or to a directory
+    which contains pyproject.toml
+        :type target_dir_or_file: Union[Path, str]
+        :param fail: Raises VersionNotFoundError if True, by default False
+        :type fail: bool
+        :param default_return: Returns when the version hasn't been found,
+        empty string by default, ignored when fail is True
+        :type default_return: Optional[str]
+        :param version_regex: Regular expression for parsing version from a file
+        :type version_regex: str
 
-    :raises: VersionNotFoundError
-    :return: Version of the package, returns "default_return" value if version cannot be parsed
-    :rtype: Optional[str]
+        :raises: VersionNotFoundError
+        :return: Version of the package, returns "default_return" value
+        if version cannot be parsed
+        :rtype: Optional[str]
     """
     if isinstance(target_dir_or_file, (Path, str)):
         target_path = Path(target_dir_or_file)

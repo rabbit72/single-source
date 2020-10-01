@@ -6,7 +6,8 @@ __all__ = (
 )
 
 from pathlib import Path
-from .version import get_version
+
 from .errors import SingleSourceError, VersionNotFoundError
+from .version import get_version
 
 __version__ = get_version(__name__, Path(__file__).parent.parent)
