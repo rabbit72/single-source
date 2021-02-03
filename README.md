@@ -20,6 +20,7 @@ __version__ = get_version(__name__, Path(__file__).parent.parent)
 ```
 
 ## Root of the problem
+
 You use modern `pyproject.toml` and want to keep the version of your package
 here:
 ```toml
@@ -28,7 +29,10 @@ here:
 name = "modern-project"
 version = "0.1.0"
 ```
-Since you need the version in your Python code, you duplicate it like this:
+
+Let's imagine the version of your package is required in some place of the code.
+
+Since you need the version in your Python code, you may want to duplicate the version by putting it as a string variable to some python file:
 ```python
 # modern_project/__init__.py
 __version__ = "0.1.0"
@@ -36,6 +40,10 @@ __version__ = "0.1.0"
 # modern_project/version.py
 version = "0.1.0"
 ```
+
+Then you realize you don't want to have the version in a python file and in pyproject.toml at the same time. It's harder to keep them consistent and easier to forget to bump both versions before release.
+
+Also, you don't want to build the wheel by creating some script for auto incrementing the version in both places (and use it in your CI flow, for example). Instead you want use `poetry version` commands.
 
 ## Installation
 You can install `single-source` via [pip](https://pip.pypa.io/en/stable/)
