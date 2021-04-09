@@ -8,7 +8,7 @@ try:
     import importlib.metadata as importlib_metadata
 except ModuleNotFoundError:
     # for Python <3.8 add 'importlib_metadata' as a dependency
-    import importlib_metadata
+    import importlib_metadata  # type: ignore
 
 
 VERSION_REGEX = r"\s*version\s*=\s*[\"']\s*([-.\w]{3,})\s*[\"']\s*"
@@ -58,7 +58,7 @@ def get_version(
 
     version: Optional[str] = _get_version_from_metadata(package_name)
     if version is None:
-        version: Optional[str] = _get_version_from_path(target_path, version_regex)
+        version = _get_version_from_path(target_path, version_regex)
 
     if not version and fail:
         raise VersionNotFoundError(
@@ -71,8 +71,8 @@ def get_version(
 def _get_version_from_metadata(package_name: str) -> Optional[str]:
     """Implements a getting version flow for installed package"""
     try:
-        version = importlib_metadata.version(package_name)
-    except importlib_metadata.PackageNotFoundError:
+        version: str = importlib_metadata.version(package_name)  # type: ignore
+    except importlib_metadata.PackageNotFoundError:  # type: ignore
         return None
     else:
         return version.strip()
@@ -87,8 +87,9 @@ def _get_version_from_path(file_path: Path, version_regex: str) -> Optional[str]
     try:
         with file_path.open(mode="r", encoding="utf-8") as file_with_version:
             for line in file_with_version:
-                version: re.Match = compiled_version_regex.search(line)
+                version: Optional[re.Match] = compiled_version_regex.search(line)  # type: ignore # noqa: E501
                 if version is not None:
                     return version.group(1).strip()
     except (FileNotFoundError, UnicodeDecodeError):
-        return None
+        pass
+    return None
