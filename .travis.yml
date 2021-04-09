@@ -23,6 +23,8 @@ jobs:
       script: isort . --check
     - name: flake8
       script: flake8 .
+    - name: mypy
+      script: mypy .
     - stage: test
       python: 3.6
     - python: 3.7

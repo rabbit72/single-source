@@ -32,12 +32,17 @@ isort = {version = "*", extras = ["pyproject"]}
 flake8 = "*"
 flake8-bugbear = "*"
 pre-commit = "*"
+mypy = "^0.812"
 
 
 [tool.poetry.dependencies]
 python = "^3.6"
 importlib_metadata = { version = "^3.0", python = "< 3.8" }
 
+
+[tool.black]
+line-length = 88
+target-version = ['py36']
 
 # backward compatibility with black
 [tool.isort]
