@@ -1,7 +1,7 @@
 import sys
+from pathlib import Path
 
 import pytest
-import toml
 
 from single_source.version import (
     VERSION_REGEX,
@@ -30,12 +30,11 @@ def test_get_version_from_installed_package(mocker):
     assert version_from_metadata == expected_version
 
 
-def test_get_version_from_pyproject(correct_pyproject_path):
-    pyproject = toml.load(str(correct_pyproject_path))
-
+def test_get_version_from_pyproject(
+    correct_pyproject_path: Path, version_from_pyproject: str
+):
     version = _get_version_from_path(correct_pyproject_path, VERSION_REGEX)
-    cleaned_version = pyproject["tool"]["poetry"]["version"].strip()
-    assert version == cleaned_version
+    assert version == version_from_pyproject
 
 
 def test_get_version_raise_exception(non_existing_package_name, bad_pyproject_path):
@@ -64,3 +63,13 @@ def test_get_version_from_setuppy(correct_setuppy_path):
 
     version = _get_version_from_path(correct_setuppy_path, VERSION_REGEX)
     assert version == expected_version
+
+
+def test_get_version_pyproject_first_priority_than_from_installed_package(
+    correct_pyproject_path: Path, version_from_pyproject: str
+):
+    package_name = "dummy_name"
+    fail = True
+
+    version = get_version(package_name, correct_pyproject_path.parent, fail=fail)
+    assert version == version_from_pyproject

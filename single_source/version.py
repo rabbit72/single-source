@@ -56,9 +56,9 @@ def get_version(
     if not target_path.is_file():
         target_path /= pyproject_name
 
-    version: Optional[str] = _get_version_from_metadata(package_name)
+    version: Optional[str] = _get_version_from_path(target_path, version_regex)
     if version is None:
-        version = _get_version_from_path(target_path, version_regex)
+        version = _get_version_from_metadata(package_name)
 
     if not version and fail:
         raise VersionNotFoundError(

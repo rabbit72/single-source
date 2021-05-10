@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import pytest
+import toml
 
 TEST_VERSION_STRINGS = [
     ("version = '2.0.1-alpha.0'  ", "2.0.1-alpha.0"),
@@ -28,6 +29,12 @@ def bad_pyproject_path() -> Path:
 @pytest.fixture
 def correct_pyproject_path() -> Path:
     return Path(__file__).parent / "data" / "pyproject.toml"
+
+
+@pytest.fixture
+def version_from_pyproject(correct_pyproject_path: Path) -> str:
+    pyproject = toml.load(str(correct_pyproject_path))
+    return pyproject["tool"]["poetry"]["version"].strip()
 
 
 @pytest.fixture
