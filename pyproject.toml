@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "single-source"
-version = "0.2.0"
+version = "0.3.0"
 description = "Access to the project version in Python code for PEP 621-style projects"
 authors = ["Daniil Shadrin <rabbit72rus@gmail.com>"]
 maintainers = ["Daniil Shadrin <rabbit72rus@gmail.com>"]
