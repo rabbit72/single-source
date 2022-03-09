@@ -9,6 +9,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  POETRY_VIRTUALENVS_CREATE: false
+  
 jobs:
   build:
 
