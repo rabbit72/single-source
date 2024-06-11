@@ -14,17 +14,10 @@ from single_source.version import (
 
 def test_get_version_from_installed_package(mocker):
     expected_version = "2.0.1-alpha.0"
+    import importlib.metadata
 
-    if sys.version_info < (3, 8):
-        import importlib_metadata
-
-        mocker.patch("importlib_metadata.version")
-        importlib_metadata.version.return_value = expected_version
-    elif sys.version_info >= (3, 8):
-        import importlib.metadata
-
-        mocker.patch("importlib.metadata.version")
-        importlib.metadata.version.return_value = expected_version
+    mocker.patch("importlib.metadata.version")
+    importlib.metadata.version.return_value = expected_version
 
     version_from_metadata = _get_version_from_metadata("does not matter")
     assert version_from_metadata == expected_version
