@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "single-source"
-version = "0.3.0"
+version = "0.4.0"
 description = "Access to the project version in Python code for PEP 621-style projects"
 authors = ["Daniil Shadrin <rabbit72rus@gmail.com>"]
 maintainers = ["Daniil Shadrin <rabbit72rus@gmail.com>"]
@@ -24,25 +24,24 @@ packages = [{include = "single_source"}]
 "Bug Tracker" = "https://github.com/rabbit72/single-source/issues"
 
 [tool.poetry.dev-dependencies]
-toml = "^0.10.1"
+toml = "^0.10.2"
 pytest = "*"
 pytest-mock = "*"
-black = "^22.1.0"
+black = "^24.4.2"
 isort = {version = "*", extras = ["pyproject"]}
 flake8 = "*"
 flake8-bugbear = "*"
 pre-commit = "*"
-mypy = "^0.812"
+mypy = "^1.10.0"
 
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
-importlib_metadata = { version = ">=3.0,<5", python = "< 3.8" }
+python = "^3.8"
 
 
 [tool.black]
 line-length = 88
-target-version = ['py36']
+target-version = ['py38']
 
 # backward compatibility with black
 [tool.isort]

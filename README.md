@@ -7,7 +7,7 @@ one source of truth for version, name and etc.
 
 At the moment, the library provides the single point for a package version.
 
-It supports Python 3.6+.
+It supports Python 3.8+.
 
 ## Quick start
 

@@ -1,15 +1,9 @@
+import importlib.metadata as importlib_metadata
 import re
 from pathlib import Path
 from typing import Optional, Union
 
 from .errors import VersionNotFoundError
-
-try:
-    import importlib.metadata as importlib_metadata
-except ModuleNotFoundError:
-    # for Python <3.8 add 'importlib_metadata' as a dependency
-    import importlib_metadata  # type: ignore
-
 
 VERSION_REGEX = r"\s*version\s*=\s*[\"']\s*([-.\w]{3,})\s*[\"']\s*"
 
